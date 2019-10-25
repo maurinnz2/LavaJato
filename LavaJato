@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package lavajato;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Mauro
+ */
+public class LavaJato {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        boolean ct = true;
+        Scanner sc = new Scanner(System.in);
+        
+       System.out.println("BEM VINDO AO LAVA JATO");
+       System.out.println("------------------------");
+       
+       List <carro> entrada = new ArrayList<>();
+       List <carro> saida = new ArrayList<>();
+       
+       while(ct == true){  //ADICIONAR CARRO A FILA
+           System.out.println("1 - Adicionar Carro\n2 - Remover Carro\n3 - Ver fila de espera\n4 - Lista de carros lavados\n5 - exit");
+           int esc = sc.nextInt();
+            switch (esc) {
+                case 1:
+                    System.out.println("Informe o dono do carro: ");
+                    String d = sc.next();
+                    System.out.println("Informe a cor: ");
+                    String c = sc.next();
+                    System.out.println("Informe o modelo: ");
+                    String m = sc.next();
+                    entrada.add(new carro(d,m,c));
+                    break;
+                case 2:
+                    //REMOVER DA FILA DE ESPERAR E ADICIONAR A FILA DE LAVADOS
+                    if(entrada == null){
+                        System.out.println("Fila Vazia");
+                    }else{
+                        saida.add(entrada.get(0)); // ADICIONA
+                        entrada.remove(0); // REMOVE
+                    }    break;
+                case 3:
+                    // IMPRIMI A FILA DE ESPERA
+                    System.out.println("----FILA DE ESPERA---- ");
+                    for (carro ent : entrada){
+                        System.out.println(ent);
+                    }     break;
+                case 4:
+                    //IMPRIMI A FILA DE CARROS LAVADOS
+                    System.out.println("----CARROS LAVADOS");
+                    if (saida.size() == 0){
+                        System.out.println("\n----NÃO TEM CARROS LAVADOS----\n");
+                    }
+                    else{
+                        for(carro sai : saida){
+                            System.out.println(sai);
+                        }
+                    }    break;
+                case 5:
+                    System.out.println("Sistema encerrado...!");
+                    ct = false;
+                    break;
+                default:
+                    System.out.println("\nOPÇÃO INVALIDA \n");
+                    break;
+            }
+       
+    }
+    
+}
+}
